@@ -11,7 +11,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * <p>
- * 华数康 Listener 基类，为后续子类提供 springContainer 容器实例
+ * 华数康 Listener 基类，为后续子类提供 springContainer 容器实例 new commet
  * </p>
  * 
  * @author liubin
