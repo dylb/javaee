@@ -16,11 +16,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Oracle extends OracleConnection {
+	
 
 	public void testDB() throws SQLException {
 		Connection con = dbConnection();
 		if (con == null) {
 			System.out.println("数据库开启失败");
+			System.out.println("");
 			return;
 		}
 		Statement sql = con.createStatement();

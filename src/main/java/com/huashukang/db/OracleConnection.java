@@ -23,9 +23,7 @@ public class OracleConnection {
 	@Autowired
 	DBConfig dbConfig;
 
-	private Connection conn = null;
-	
-	
+	private Connection conn = null;	
 
 	public Connection dbConnection() {
 

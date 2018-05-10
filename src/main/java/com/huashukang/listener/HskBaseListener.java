@@ -18,6 +18,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  *
  */
 public class HskBaseListener implements ServletContextListener {
+	
+	
 
 	protected WebApplicationContext springContainer;
 
