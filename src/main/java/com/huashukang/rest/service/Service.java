@@ -1,6 +1,7 @@
 package com.huashukang.rest.service;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -17,14 +18,15 @@ public class Service {
 	@Context
 	Request request;
  
-	@GET
+	@POST
 	@Produces(MediaType.TEXT_PLAIN)
 	public String sayName() {	
 		
 		ContainerRequest cr=(ContainerRequest) request;		
 		System.out.println(cr.getRequestUri().toString());
 		System.out.println(request.getClass().getName());
-		return "hello";	
+		System.out.println("POST result");
+		return "hello from POST";	
 	}
 	
 	@Path("test")

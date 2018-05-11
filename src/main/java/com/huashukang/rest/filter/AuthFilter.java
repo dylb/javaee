@@ -19,7 +19,7 @@ import com.huashukang.rest.service.UserManager;
 /**
  * @author liubin
  */
-public class AuthFilter implements ContainerRequestFilter { 
+public class AuthFilter implements ContainerRequestFilter {
 
 	@Context
 	ServletContext servletContext;
@@ -27,21 +27,25 @@ public class AuthFilter implements ContainerRequestFilter {
 	private UserManager userManager;
 
 	@Override
-	public void filter(ContainerRequestContext requestContext) throws IOException { 
+	public void filter(ContainerRequestContext requestContext) throws IOException {
+		// 针对浏览器的预检信息直接放行
+		if (!requestContext.getRequest().getMethod().equals("OPTIONS")) {
+			if (userManager == null) {
+				ApplicationContext applicationContext = WebApplicationContextUtils
+						.getWebApplicationContext(servletContext);
+				userManager = applicationContext.getBean(UserManager.class);
+			}
+			if (userManager.check(requestContext)) {
+				System.out.println("filter 检查 合法用户");
+			} else {
+				System.out.println("filter  检查 非法用户");
+				Response.ResponseBuilder responseBuilder = Response.status(Response.Status.UNAUTHORIZED)
+						.type("text/plain;charset=utf-8").entity("未授权用户，服务拒绝访问！");
+				Response response = responseBuilder.build();
+				requestContext.abortWith(response);
+			}
+		}
 
-		if (userManager == null) {
-			ApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-			userManager = applicationContext.getBean(UserManager.class);
-		}
-		if (userManager.check(requestContext)) {
-			System.out.println("filter 检查 合法用户");
-		} else {
-			System.out.println("filter  检查 非法用户");
-			Response.ResponseBuilder responseBuilder = Response.status(Response.Status.UNAUTHORIZED)
-					.type("text/plain;charset=utf-8").entity("未授权用户，服务拒绝访问！");
-			Response response = responseBuilder.build();
-			requestContext.abortWith(response);
-		}
 	}
 
 }
