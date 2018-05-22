@@ -66,7 +66,7 @@
 			<version>5.0.5.RELEASE</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.github.noraui/ojdbc8 -->
+		<!-- oracle 	驱动依赖包 -->
 		<dependency>
 			<groupId>com.github.noraui</groupId>
 			<artifactId>ojdbc8</artifactId>
